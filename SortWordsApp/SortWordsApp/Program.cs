@@ -2,46 +2,34 @@
 
 namespace SortWordsApp
 {
-    class Pogram
+    /// <summary>
+    /// Main entry point for the SortWordsApp.
+    /// Processes multiple text files to sort and deduplicate the words, and outputs the results into a new file.
+    /// </summary>
+    class Program
     {
+        /// <summary>
+        /// Asynchronously executes the main logic of the application, handling command line inputs
+        /// and orchestrating the reading, processing, and writing of files.
+        /// </summary>
+        /// <param name="args">Command line arguments specifying the paths to the input files.</param>
         static async Task Main(string[] args)
         {
-            if (args.Length < 3)
-            {
-                Console.WriteLine("Please provide at least three file paths as arguments.");
-                return;
-            }
             /*string[] filePaths = {
-                @"C:\Users\micha\source\repos\SortWordsApp\file1.txt",
-                @"C:\Users\micha\source\repos\SortWordsApp\file2.txt",
-                @"C:\Users\micha\source\repos\SortWordsApp\file3.txt"
+                @"C:\Users\micha\source\repos\SortWordsApp\F1.txt",
+                @"C:\Users\micha\source\repos\SortWordsApp\F2.txt",
+                @"C:\Users\micha\source\repos\SortWordsApp\F3.txt"
             };*/
-
-            string[] filePaths = args;
-            Console.WriteLine("Enter your sorting option (-a for asceding, -d for desceding):");
-            string sortOption = Console.ReadLine();
-
-            Console.WriteLine("Enter your spliting character (-s for space, -c for comma, -n for new line:");
-            string splitOption = Console.ReadLine();
 
             try
             {
-                var fileContents = await FileReader.ReadAllFilesAsync(filePaths);
-                var contentProcessor = new ContentProcessor(fileContents);
-                var formatedContent = contentProcessor.GetFormattedContents(sortOption, splitOption);
-                await FileWriter.WriteToFileAsync(@"C:\Users\micha\source\repos\SortWordsApp\file4.txt", formatedContent);
-                Console.WriteLine("Processed content written to file4.txt");
-                var (mostFrequentWords, maxCount) = contentProcessor.GetMostFrequentWords();
-                Console.WriteLine($"The most frequent word occur {maxCount} times:");
-                foreach ( var word in mostFrequentWords )
-                {
-                    Console.WriteLine(word);
-                }
-
+                var (filePaths, sortOption, splitOption) = UserInputHandler.GetInputs(args);
+                await FileProcessor.ProcessFilesAsync(filePaths, sortOption, splitOption);
             }
-            catch (Exception ex)
+
+            catch (Exception ex) 
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
+                Console.WriteLine(ex.Message);
             }
         }
     }
