@@ -9,7 +9,7 @@ namespace SortWordsApp
     /// <summary>
     /// Processes files by reading, combining, sorting, and writing their contents based on user-specified options.
     /// </summary>
-    class FileProcessor
+    static class FileProcessor
     {
         /// <summary>
         /// Manages the file reading, content processing, and file writing tasks.

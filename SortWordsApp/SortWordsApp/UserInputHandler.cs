@@ -9,7 +9,7 @@ namespace SortWordsApp
     /// <summary>
     /// Handles user inputs, ensuring correct arguments.
     /// </summary>
-    class UserInputHandler
+    static class UserInputHandler
     {
         /// <summary>
         /// Retrieves and validates user inputs from the command line arguments and interactive inputs.

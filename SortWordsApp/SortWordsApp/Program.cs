@@ -15,12 +15,6 @@ namespace SortWordsApp
         /// <param name="args">Command line arguments specifying the paths to the input files.</param>
         static async Task Main(string[] args)
         {
-            /*string[] filePaths = {
-                @"C:\Users\micha\source\repos\SortWordsApp\F1.txt",
-                @"C:\Users\micha\source\repos\SortWordsApp\F2.txt",
-                @"C:\Users\micha\source\repos\SortWordsApp\F3.txt"
-            };*/
-
             try
             {
                 var (filePaths, sortOption, splitOption) = UserInputHandler.GetInputs(args);
